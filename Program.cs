@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,29 +18,28 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+var products = new List<Product>();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+var iphone = new Product("Iphone 14", 9000, "Phone");
+var shoes = new Product("Jordan 4s", 3000, "Clothing");
+var airfryer = new Product("Ninja Airfyer", 2400, "Kitchen Gear");
+
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+class Product
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+
+    public string Name { get; set; }
+    public double Price { get; set; }
+
+    public string Category { get; set; }
+
+    public Product(string name, int price, string category)
+    {
+
+        this.Name = name;
+        this.Price = price;
+        this.Category = category;
+    }
 }
