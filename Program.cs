@@ -45,11 +45,16 @@ class Product
 
     public string Category { get; set; }
 
+
     public Product(int Id, string name, int price, string category)
     {
         this.id = Id;
         this.Name = name;
         this.Price = price;
         this.Category = category;
+    }
+
+    public Product (){
+        
     }
 }
