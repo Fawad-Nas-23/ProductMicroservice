@@ -20,24 +20,29 @@ app.UseHttpsRedirection();
 
 var products = new List<Product>();
 
-var iphone = new Product("Iphone 14", 9000, "Phone");
-var shoes = new Product("Jordan 4s", 3000, "Clothing");
-var airfryer = new Product("Ninja Airfyer", 2400, "Kitchen Gear");
+var iphone = new Product(1, "Iphone 14", 9000, "Phone");
+var shoes = new Product(2, "Jordan 4s", 3000, "Clothing");
+var airfryer = new Product(3, "Ninja Airfyer", 2400, "Kitchen Gear");
+
+products.Add(iphone);
+products.Add(shoes);
+products.Add(airfryer);
 
 
 app.Run();
 
 class Product
 {
+    public int id {get; set;}
 
     public string Name { get; set; }
     public double Price { get; set; }
 
     public string Category { get; set; }
 
-    public Product(string name, int price, string category)
+    public Product(int Id, string name, int price, string category)
     {
-
+        this.id = Id;
         this.Name = name;
         this.Price = price;
         this.Category = category;
