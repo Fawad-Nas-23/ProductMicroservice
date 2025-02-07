@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Authorization.Infrastructure;
-
+using System.Linq;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,26 +28,35 @@ products.Add(iphone);
 products.Add(shoes);
 products.Add(airfryer);
 
-app.MapPut(/"products/{name}", (string name) =>
+app.MapPut("/products/{id}", (int id, Product updateProduct) =>
+    {
+        var product = products.FirstOrDefault(p => p.id == id);
 
-{
-    
-}
+        if (product != null)
+        {
 
-)
+            product.Price = updateProduct.Price;
+        }
+        else
+        {
+            throw new Exception("Produktet findes ikke");
+        }
+    }
+);
 
 
 app.Run();
 
 class Product
 {
-    public int id {get; set;}
+    public int id { get; set; }
 
     public string Name { get; set; }
     public double Price { get; set; }
 
     public string Category { get; set; }
 
+    public Product() { }
     public Product(int Id, string name, int price, string category)
     {
         this.id = Id;
