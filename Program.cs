@@ -24,6 +24,14 @@ var iphone = new Product("Iphone 14", 9000, "Phone");
 var shoes = new Product("Jordan 4s", 3000, "Clothing");
 var airfryer = new Product("Ninja Airfyer", 2400, "Kitchen Gear");
 
+app.MapPut(/"products/{name}", (string name) =>
+
+{
+    
+}
+
+)
+
 
 app.Run();
 
