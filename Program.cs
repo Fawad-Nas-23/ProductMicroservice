@@ -28,6 +28,11 @@ products.Add(iphone);
 products.Add(shoes);
 products.Add(airfryer);
 
+app.MapPost("/products/addproduct", (Product product) =>
+{
+    products.Add(product);
+});
+
 
 app.Run();
 
