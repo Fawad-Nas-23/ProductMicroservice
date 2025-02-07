@@ -44,6 +44,11 @@ app.MapPut("/products/{id}", (int id, Product updateProduct) =>
     }
 );
 
+app.MapPost("/products/addproduct", (Product product) =>
+{
+    products.Add(product);
+});
+
 
 app.Run();
 
@@ -56,6 +61,7 @@ class Product
 
     public string Category { get; set; }
 
+
     public Product() { }
     public Product(int Id, string name, int price, string category)
     {
@@ -63,5 +69,9 @@ class Product
         this.Name = name;
         this.Price = price;
         this.Category = category;
+    }
+
+    public Product (){
+        
     }
 }
